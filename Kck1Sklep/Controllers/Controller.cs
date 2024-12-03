@@ -66,7 +66,7 @@ namespace Kck1Sklep.Controllers
         {
             int selectedIndex = 0;
             bool running = true;
-            Stack<int> menuStack = new Stack<int>();  // Stos do śledzenia poprzednich menu
+            Stack<int> menuStack = new Stack<int>();
 
             while (running)
             {
@@ -82,13 +82,13 @@ namespace Kck1Sklep.Controllers
                         selectedIndex = selectedIndex == _menuOptions.Length - 1 ? 0 : selectedIndex + 1;
                         break;
                     case ConsoleKey.Enter:
-                        menuStack.Push(selectedIndex); // Zapisujemy obecne menu na stos
+                        menuStack.Push(selectedIndex);
                         HandleMenuSelection(selectedIndex, menuStack);
                         break;
                     case ConsoleKey.Backspace:
                         if (menuStack.Count > 0)
                         {
-                            selectedIndex = menuStack.Pop();  // Powrót do poprzedniego menu
+                            selectedIndex = menuStack.Pop();
                         }
                         break;
                 }
@@ -124,14 +124,13 @@ namespace Kck1Sklep.Controllers
             }
         }
 
-        // Wyszukiwanie produktu po nazwie
         private void SearchProductByName(Stack<int> menuStack)
         {
             string query = _view.GetSearchQuery();
             var results = _products.Where(p => p.Name.ToLower().Contains(query.ToLower())).ToList();
             if (results.Count > 0)
             {
-                ShowProductList(results, menuStack);  // Przekazanie menuStack do metody ShowProductList
+                ShowProductList(results, menuStack);
             }
             else
             {
@@ -141,7 +140,6 @@ namespace Kck1Sklep.Controllers
         }
 
 
-        // Filtrowanie produktów po cenie
         private void FilterProductsByPrice(Stack<int> menuStack)
         {
             var (minPrice, maxPrice) = _view.GetPriceRange();
@@ -157,7 +155,6 @@ namespace Kck1Sklep.Controllers
             }
         }
 
-        // Filtrowanie produktów po dostępności
         private void FilterProductsByStock(Stack<int> menuStack)
         {
             int minStock = _view.GetMinStock();
@@ -223,10 +220,8 @@ namespace Kck1Sklep.Controllers
                     case ConsoleKey.Enter:
                         int quantity = _view.GetProductQuantityInput();
 
-                        // Attempt to add product to the cart
                         _cart.AddProduct(products[selectedIndex], quantity);
 
-                        // Optionally, you can ask the user if they want to continue adding items
                         Console.WriteLine("Naciśnij dowolny klawisz, aby kontynuować dodawanie lub Esc, aby wrócić do listy produktów.");
                         if (Console.ReadKey().Key == ConsoleKey.Escape)
                         {
@@ -251,7 +246,7 @@ namespace Kck1Sklep.Controllers
                 _view.ShowCartItems(_cart.GetItems(), selectedIndex);
                 Console.WriteLine($"Wartość zakupów: {_cart.GetTotal():C}");
 
-                if (_cart.GetItems().Count == 0)  // Jeśli koszyk jest pusty, blokujemy dodawanie/usuwanie
+                if (_cart.GetItems().Count == 0)
                 {
                     Console.WriteLine("Koszyk jest pusty. Nie możesz dodać ani usunąć produktów.");
                 }
@@ -267,7 +262,7 @@ namespace Kck1Sklep.Controllers
                         selectedIndex = selectedIndex == _cart.GetItems().Count - 1 ? 0 : selectedIndex + 1;
                         break;
                     case ConsoleKey.Enter:
-                        if (_cart.GetItems().Count == 0)  // Jeśli koszyk jest pusty, nie pozwalamy na wybór
+                        if (_cart.GetItems().Count == 0)
                         {
                             Console.Clear();
                             Console.WriteLine("Koszyk jest pusty, nie możesz dodać ani usunąć produktów.");
@@ -277,7 +272,7 @@ namespace Kck1Sklep.Controllers
                             Console.Clear();
                             Console.WriteLine("1. Dodaj więcej sztuk");
                             Console.WriteLine("2. Usuń sztuki");
-                            int action = _view.GetIntInput(); // Pobieranie akcji od użytkownika
+                            int action = _view.GetIntInput();
 
                             if (action == 1)
                             {
@@ -293,7 +288,7 @@ namespace Kck1Sklep.Controllers
 
                         if (_cart.GetItems().Count == 0)
                         {
-                            viewingCart = false;  // Jeśli koszyk jest pusty, wychodzimy
+                            viewingCart = false;
                         }
                         break;
                     case ConsoleKey.Backspace:

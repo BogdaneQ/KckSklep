@@ -11,11 +11,15 @@ namespace Kck1Sklep.Views
     public class View
     {
         private string sklepLogo = @"
-  SSSSS  K   K  L       EEEEE  PPPP
- S       K  K   L       E      P   P
-  SSS    KKK    L       EEEE   PPPP
-     S   K  K   L       E      P
-  SSSS   K   K  LLLLL   EEEEE  P
+
+          ::::::::       :::::::::       ::::::::       :::::::::   :::::::::::    :::   ::: 
+        :+:    :+:      :+:    :+:     :+:    :+:      :+:    :+:      :+:        :+:   :+:  
+       +:+             +:+    +:+     +:+    +:+      +:+    +:+      +:+         +:+ +:+    
+      +#++:++#++      +#++:++#+      +#+    +:+      +#++:++#:       +#+          +#++:      
+            +#+      +#+            +#+    +#+      +#+    +#+      +#+           +#+        
+    #+#    #+#      #+#            #+#    #+#      #+#    #+#      #+#           #+#         
+    ########       ###             ########       ###    ###      ###           ###          
+
 ";
 
         public void ShowEpilepsyWarning()
@@ -35,20 +39,17 @@ namespace Kck1Sklep.Views
             string warningText = "       OSTRZEŻENIE: MIGOTANIE EKRANU!";
 
             Console.Clear();
-            DateTime endTime = DateTime.Now.AddSeconds(3); // Ostrzeżenie trwa 3 sekundy
+            DateTime endTime = DateTime.Now.AddSeconds(3);
 
             while (DateTime.Now < endTime)
             {
-                // Wyświetl migający trójkąt
                 Console.Clear();
 
-                // Ustawienia dla trójkąta (żółty na czarnym tle)
                 Console.BackgroundColor = ConsoleColor.Black;
                 Console.ForegroundColor = ConsoleColor.Yellow;
 
-                // Wyśrodkowanie trójkąta w oknie konsoli
-                int triangleX = (Console.WindowWidth - 33) / 2; // Długość rzędu trójkąta (w ASCII około 33 znaków)
-                int triangleY = Console.WindowHeight / 2 - 6;   // Wyśrodkowanie w pionie
+                int triangleX = (Console.WindowWidth - 33) / 2;
+                int triangleY = Console.WindowHeight / 2 - 6;
 
                 Console.SetCursorPosition(triangleX, triangleY);
                 Console.WriteLine("                   ▲                   ");
@@ -73,18 +74,15 @@ namespace Kck1Sklep.Views
                 Console.SetCursorPosition(triangleX, triangleY + 10);
                 Console.ForegroundColor = ConsoleColor.Red;
 
-                // Wyświetlenie tekstu ostrzeżenia pod trójkątem
                 Console.SetCursorPosition((Console.WindowWidth - warningText.Length) / 2, triangleY + 12);
                 Console.WriteLine(warningText);
 
-                Thread.Sleep(200); // Pauza na efekt migotania
+                Thread.Sleep(200);
 
-                // Czarny ekran (trójkąt znika)
                 Console.Clear();
-                Thread.Sleep(200); // Pauza na efekt migotania
+                Thread.Sleep(200);
             }
 
-            // Reset konsoli po ostrzeżeniu
             Console.ResetColor();
             Console.Clear();
         }
@@ -93,19 +91,16 @@ namespace Kck1Sklep.Views
         {
             Console.Clear();
 
-            // Zastosowanie ciemnego tła
             Console.BackgroundColor = ConsoleColor.Black;
             Console.ForegroundColor = ConsoleColor.Yellow;
 
-            // Wyświetlenie logo "SKLEP"
             Console.WriteLine(sklepLogo);
-            Console.WriteLine("\n=== Sklep sportowy ===");
+            Console.WriteLine("\n=== Main Menu ===");
 
             for (int i = 0; i < menuOptions.Length; i++)
             {
                 if (i == selectedIndex)
                 {
-                    // Zmieniamy tło na czerwone dla zaznaczonej opcji
                     Console.BackgroundColor = ConsoleColor.Red;
                     Console.ForegroundColor = ConsoleColor.Black;
                     Console.WriteLine($"  {menuOptions[i]}");
@@ -124,7 +119,6 @@ namespace Kck1Sklep.Views
             return Console.ReadLine();
         }
 
-        // Metoda pobierająca dane do filtrowania po cenie
         public (decimal, decimal) GetPriceRange()
         {
             Console.Write("Podaj minimalną cenę: ");
@@ -136,7 +130,6 @@ namespace Kck1Sklep.Views
             return (minPrice, maxPrice);
         }
 
-        // Metoda pobierająca minimalną ilość na stanie do filtrowania po dostępności
         public int GetMinStock()
         {
             Console.Write("Podaj minimalną dostępność (ilość na stanie): ");
@@ -146,7 +139,7 @@ namespace Kck1Sklep.Views
         public void ShowCategories(string[] categories, int selectedIndex)
         {
             Console.Clear();
-            // Ustawienie koloru tła i tekstu
+
             Console.BackgroundColor = ConsoleColor.Black;
             Console.ForegroundColor = ConsoleColor.Yellow;
 
@@ -155,7 +148,6 @@ namespace Kck1Sklep.Views
             {
                 if (i == selectedIndex)
                 {
-                    // Zmieniamy tło na czerwone dla zaznaczonej opcji
                     Console.BackgroundColor = ConsoleColor.Red;
                     Console.ForegroundColor = ConsoleColor.Black;
                     Console.WriteLine($"  {categories[i]}");
@@ -171,7 +163,6 @@ namespace Kck1Sklep.Views
         public void ShowProducts(List<Product> products, int selectedIndex)
         {
             Console.Clear();
-            // Ustawienie koloru tła i tekstu
             Console.BackgroundColor = ConsoleColor.Black;
             Console.ForegroundColor = ConsoleColor.Yellow;
 
@@ -181,7 +172,6 @@ namespace Kck1Sklep.Views
             {
                 if (i == selectedIndex)
                 {
-                    // Zmieniamy tło na czerwone dla zaznaczonej opcji
                     Console.BackgroundColor = ConsoleColor.Red;
                     Console.ForegroundColor = ConsoleColor.Black;
                     Console.WriteLine($"  {products[i].GetBasicInfo()}");
@@ -203,7 +193,6 @@ namespace Kck1Sklep.Views
         public void ShowCartItems(List<CartItem> cartItems, int selectedIndex)
         {
             Console.Clear();
-            // Ustawienie koloru tła i tekstu
             Console.BackgroundColor = ConsoleColor.Black;
             Console.ForegroundColor = ConsoleColor.Yellow;
 
@@ -219,7 +208,6 @@ namespace Kck1Sklep.Views
                 {
                     if (i == selectedIndex)
                     {
-                        // Zmieniamy tło na czerwone dla zaznaczonej opcji
                         Console.BackgroundColor = ConsoleColor.Red;
                         Console.ForegroundColor = ConsoleColor.Black;
                         Console.WriteLine($"  {cartItems[i]}");
@@ -245,7 +233,6 @@ namespace Kck1Sklep.Views
             return Console.ReadLine();
         }
 
-        // Metoda pomocnicza do pobierania poprawnych wartości numerycznych
         public int GetIntInput()
         {
             while (true)
