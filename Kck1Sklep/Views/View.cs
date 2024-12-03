@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Kck1Sklep.Models;
 using System.Threading;
+using Spectre.Console;
+
 
 namespace Kck1Sklep.Views
 {
@@ -185,10 +187,16 @@ namespace Kck1Sklep.Views
 
             if (products.Any())
             {
+                // Ustawienie koloru na żółty dla napisu
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine("\n=== Szczegóły produktu ===");
+                Console.ResetColor(); // Przywrócenie domyślnego koloru
+
                 Console.WriteLine(products[selectedIndex].GetDetails());
+                Console.ResetColor();
             }
         }
+
 
         public void ShowCartItems(List<CartItem> cartItems, int selectedIndex)
         {
