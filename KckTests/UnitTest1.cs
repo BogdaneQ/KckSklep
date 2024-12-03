@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Xunit;
 using Moq;
+using Kck1Sklep.Models;
 
 namespace KckTests
 {
