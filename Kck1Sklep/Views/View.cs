@@ -26,17 +26,25 @@ namespace Kck1Sklep.Views
 
         public void ShowEpilepsyWarning()
         {
-            string triangleWithSkull = @"
-                 ▲                   
-                ▲ ▲                   
-               ▲   ▲                  
-              ▲     ▲                
-             ▲       ▲               
-            ▲         ▲              
-           ▲           ▲             
-          ▲             ▲            
-         ▲               ▲           
-        ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲                ";
+            string exclamationArt = @"
+ 
+ !!! 
+!!:!!
+!:::!
+!:::!
+!:::!
+!:::!
+!:::!
+!:::!
+!:::!
+!:::!
+!!:!!
+ !!! 
+     
+ !!! 
+!!:!!
+ !!! 
+";
 
             string warningText = "       OSTRZEŻENIE: MIGOTANIE EKRANU!";
 
@@ -50,44 +58,33 @@ namespace Kck1Sklep.Views
                 Console.BackgroundColor = ConsoleColor.Black;
                 Console.ForegroundColor = ConsoleColor.Yellow;
 
-                int triangleX = (Console.WindowWidth - 33) / 2;
-                int triangleY = Console.WindowHeight / 2 - 6;
+                // Wyśrodkowanie ostrzeżenia w konsoli
+                int artX = (Console.WindowWidth - exclamationArt.Split('\n')[0].Length) / 2;
+                int artY = (Console.WindowHeight - exclamationArt.Split('\n').Length) / 2;
 
-                Console.SetCursorPosition(triangleX, triangleY);
-                Console.WriteLine("                   ▲                   ");
-                Console.SetCursorPosition(triangleX, triangleY + 1);
-                Console.WriteLine("                  ▲ ▲                  ");
-                Console.SetCursorPosition(triangleX, triangleY + 2);
-                Console.WriteLine("                 ▲   ▲                 ");
-                Console.SetCursorPosition(triangleX, triangleY + 3);
-                Console.WriteLine("                ▲     ▲                ");
-                Console.SetCursorPosition(triangleX, triangleY + 4);
-                Console.WriteLine("               ▲       ▲               ");
-                Console.SetCursorPosition(triangleX, triangleY + 5);
-                Console.WriteLine("              ▲         ▲              ");
-                Console.SetCursorPosition(triangleX, triangleY + 6);
-                Console.WriteLine("             ▲           ▲             ");
-                Console.SetCursorPosition(triangleX, triangleY + 7);
-                Console.WriteLine("            ▲             ▲            ");
-                Console.SetCursorPosition(triangleX, triangleY + 8);
-                Console.WriteLine("           ▲               ▲           ");
-                Console.SetCursorPosition(triangleX, triangleY + 9);
-                Console.WriteLine("          ▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲▲          ");
-                Console.SetCursorPosition(triangleX, triangleY + 10);
+                // Rysowanie ostrzeżenia
+                foreach (var line in exclamationArt.Split('\n'))
+                {
+                    Console.SetCursorPosition(artX, artY++);
+                    Console.WriteLine(line);
+                }
+
+                // Wyświetlenie ostrzeżenia tekstowego
                 Console.ForegroundColor = ConsoleColor.Red;
-
-                Console.SetCursorPosition((Console.WindowWidth - warningText.Length) / 2, triangleY + 12);
+                Console.SetCursorPosition((Console.WindowWidth - warningText.Length) / 2, artY + 1);
                 Console.WriteLine(warningText);
 
-                Thread.Sleep(200);
+                Thread.Sleep(100);
 
                 Console.Clear();
-                Thread.Sleep(200);
+                Thread.Sleep(100);
             }
 
             Console.ResetColor();
             Console.Clear();
         }
+
+
 
         public void ShowMainMenu(string[] menuOptions, int selectedIndex)
         {
